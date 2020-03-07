@@ -7,12 +7,6 @@ export default (firebase: Firebase) => {
   useEffect(() => {
     if (firebase) {
       const user = firebase.auth().currentUser;
-      firebase
-        .auth()
-        .getRedirectResult()
-        .then((_result: any) => {
-          // do-something
-        });
       setState({ user, load: !user });
     }
   }, [firebase]);
