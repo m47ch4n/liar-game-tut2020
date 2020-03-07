@@ -11,6 +11,9 @@
     "source": "functions"
   },
   "hosting": {
+    "predeploy": [
+      "cd client && npm run build"
+    ],
     "public": "client/build",
     "ignore": [
       "firebase.json",
