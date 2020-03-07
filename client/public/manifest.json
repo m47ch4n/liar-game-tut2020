@@ -1,0 +1,15 @@
+{
+  "short_name": "liar-game-tut2020",
+  "name": "liar-game-tut2020 | 研究室配属に平和を！",
+  "icons": [
+    {
+      "src": "liar-game-tut2020.png",
+      "type": "image/png",
+      "sizes": "1202x1202"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

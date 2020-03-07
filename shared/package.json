@@ -1,0 +1,22 @@
+{
+  "name": "shared",
+  "version": "1.0.0",
+  "files": [
+    "dist"
+  ],
+  "author": "m47ch4n",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "@types/firebase": "^3.2.1",
+    "firebase": "^7.6.1",
+    "firebase-functions": "^3.3.0"
+  },
+  "scripts": {
+    "build": "tsc --build"
+  }
+}
