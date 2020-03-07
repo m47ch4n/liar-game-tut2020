@@ -4,91 +4,70 @@
   </a>
 </p>
 <h1 align="center">
-  gatsby-starter-typescript-plus
+  liar-game-tut2020
 </h1>
 
-> A starter kit for TypeScript-based Gatsby projects with sensible defaults.
+研究室配属をシミュレーションします。
 
-This is a starter kit for [Gatsby.js](https://www.gatsbyjs.org/) websites written in TypeScript. It includes the bare essentials for you to get started (styling, Markdown parsing, minimal toolset).
+## 🗒️ 特徴
 
-## 🗒️ Features
+- TUTのGSuiteでサインイン
+- 研究室配属用の点数計算が容易
+- みんなの希望研究室を調べられる
 
-- TypeScript
-- ESLint (with custom ESLint rules)
-- Markdown rendering with Remark
-- Basic component structure
-- Styling with [emotion](https://emotion.sh/)
+みんなの希望研究室は自分の希望研究室を入力した人のみに公開されます。
 
-## 🚀 Quick start
 
-> A nodejs >= 6.0.0 setup with [yarn](https://yarnpkg.com/) is recommended.
+## 🚀 コントリビューション
 
-1.  **Create a Gatsby site.**
+コントリビューションは大歓迎です！
 
-    Install `gatsby-cli` package globally on your machine.
+* issueは誰でも立てることができます。
+
+* 開発に参加したい場合、Firebaseの権限が必要なので、松元([Twitter](https://twitter.com/m47ch4n))に連絡してください。
+
+ディレクトリ構造は以下のとおりです。
+
+```
+.
+├── README.md
+├── client     (Webクライアント)
+├── firebase.json
+├── firestore.indexes.json
+├── firestore.rules
+├── functions  (Firebase Functions)
+└── shared     (共有用パッケージ)
+```
+
+1.  **Firebase CLIのインストール**
+
+    FirebaseCLIをインストールしてください。
 
     ```bash
-    # using NPM
-    npm install -g gatsby-cli
-
-    # using YARN
-    yarn global add gatsby-cli
+    npm install -g firebase-tools
     ```
 
-    Use the `gatsby-cli` to create a new site and install its dependencies.
+    次に、Firebaseにログインします。
 
     ```bash
-    gatsby new project-name https://github.com/resir014/gatsby-starter-typescript-plus
+    firebase login
     ```
 
-2.  **Start developing.**
+2.  **開発を始める**
 
-    Move to project's directory.
+    Webクライアントは`client`ディレクトリにあります。
 
     ```bash
-    cd project-name/
+    cd client/
     ```
 
-    Start your site.
+    依存パッケージをインストール
 
     ```bash
-    # using npm
+    npm install
+    ```
+
+    サーバーを起動する
+    ```bash
     npm start
-
-    # using yarn
-    yarn start
     ```
-
-    Open source code using your favorite IDE/Text editor and navigate to `src/` directory, this is where your application live.
-
-3.  **Build your application for production.**
-
-    Once you're finished, you can make production build of your app using:
-
-    ```bash
-    # using npm
-    npm run build
-
-    # using yarn
-    yarn build
-    ```
-
-4.  **Deploy your app to Github pages!**
-
-    After building your application in step 3, you're ready to publish your app and go online!
-
-    ```bash
-    # using npm
-    npm run deploy
-
-    # using yarn
-    yarn deploy
-    ```
-
-## ❤️ Credits
-
-Built with [Gatsby](https://www.gatsbyjs.org/) - the blazing-fast static site generator for [React](https://facebook.github.io/react/).
-
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/resir014/gatsby-starter-typescript-plus)
