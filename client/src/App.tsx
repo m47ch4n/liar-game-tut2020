@@ -108,7 +108,7 @@ function SignedOutRoute({ children, ...rest }) {
 
 function Filled({ children }) {
   const { sample } = useSample();
-  if (sample && !sample.gpa) {
+  if (sample && !sample.result) {
     return <Redirect to={GPA_FORM} />;
   }
 
