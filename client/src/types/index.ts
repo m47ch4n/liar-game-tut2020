@@ -34,8 +34,25 @@ export type Lab =
   | '大島研';
 
 export interface Sample {
-  gpa: number;
+  result: number;
   firstChoice: Lab;
   secondChoice: Lab;
   uid: string;
+}
+
+export interface GpaFormData {
+  english1: Grade;
+  english2: Grade;
+  algorithm: Grade;
+  probability: Grade;
+  formal_lang: Grade;
+  discrete_math: Grade;
+  software1: Grade;
+  software2: Grade;
+  software3: Grade;
+  network: Grade;
+  experiment: Grade;
+  course: Grade;
+  choise1: Grade;
+  choise2: Grade;
 }
