@@ -56,3 +56,8 @@ export interface GpaFormData {
   choise1: Grade;
   choise2: Grade;
 }
+
+export interface LabFormData {
+  firstChoice: Lab;
+  secondChoice: Lab;
+}

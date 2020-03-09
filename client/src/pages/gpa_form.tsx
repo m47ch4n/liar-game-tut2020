@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { GpaFormData } from '../types';
 import useFirebase from '../hooks/use_firebase';
 import useUser from '../hooks/use_user';
+import useSample from '../hooks/use_sample';
 
 import {
   Button,
@@ -24,11 +25,14 @@ import { subjects, points } from '../constants';
 import { LABS } from '../constants/routes';
 
 export default () => {
+  const toast = useToast();
   const [result, setResult] = useState<number>(undefined);
   const [condition, setCondition] = useState<'' | 'req'>('');
   const dispatch = useDispatch();
   const firebase = useFirebase();
   const { user } = useUser();
+  const { sample } = useSample();
+
   const { handleSubmit, errors, register, watch } = useForm<GpaFormData>({
     defaultValues: subjects
       .filter(({ name }) => name !== '-' && name !== 'dummy')
@@ -38,7 +42,6 @@ export default () => {
       }, {}),
   });
   const formValues = watch();
-  const toast = useToast();
 
   useEffect(() => {
     if (Object.keys(formValues).filter(field => formValues[field] === '').length === 0) {
@@ -66,6 +69,7 @@ export default () => {
       .collection('samples')
       .doc(user.uid)
       .set({
+        ...sample,
         uid: user.uid,
         result,
       })
