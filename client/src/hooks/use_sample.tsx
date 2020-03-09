@@ -4,14 +4,27 @@ import { Sample } from '../types';
 import useFirebase from './use_firebase';
 import useUser from './use_user';
 
-const SampleContext = createContext({ load: true, sample: null as Sample, error: null as Error });
+interface SC {
+  load: boolean;
+  sample: Sample;
+  error: Error;
+}
+
+const initialSample: Sample = {
+  uid: undefined,
+  result: undefined,
+  firstChoice: undefined,
+  secondChoice: undefined,
+};
+
+const SampleContext = createContext<SC>({ load: true, sample: initialSample, error: null });
 
 export default () => {
   return useContext(SampleContext);
 };
 
 export const SampleContextProvider = ({ uid, children }) => {
-  const [state, setState] = useState({ sample: null, load: true, error: null });
+  const [state, setState] = useState({ sample: initialSample, load: true, error: null });
   const firebase = useFirebase();
   const { load } = useUser();
 
@@ -27,12 +40,12 @@ export const SampleContextProvider = ({ uid, children }) => {
             setState({ sample, load: false, error: null });
           },
           error => {
-            setState({ sample: null, load: false, error });
+            setState({ sample: initialSample, load: false, error });
           },
         );
       return () => unsubscribe();
     } else {
-      setState({ sample: null, load, error: null });
+      setState({ sample: initialSample, load, error: null });
     }
   }, [uid, firebase, load]);
 

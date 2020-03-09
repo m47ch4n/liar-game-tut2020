@@ -23,9 +23,9 @@ export default props => {
 
   const handleSignIn = () => {
     const provider = new auth.GoogleAuthProvider();
-    // provider.setCustomParameters({
-    //   hd: 'tut.jp',
-    // });
+    provider.setCustomParameters({
+      hd: 'tut.jp',
+    });
     firebase.auth().signInWithRedirect(provider);
   };
 
