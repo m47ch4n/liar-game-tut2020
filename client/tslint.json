@@ -14,7 +14,8 @@
     "prettier": true,
     "no-submodule-imports": false,
     "object-literal-sort-keys": false,
-    "no-fallthrough": false
+    "no-fallthrough": false,
+    "interface-name": false
   },
   "rulesDirectory": ["tslint-plugin-prettier"],
   "linterOptions": {

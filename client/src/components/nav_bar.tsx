@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { auth } from 'firebase/app';
 import { useDispatch } from 'react-redux';
+import useFirebase from '../hooks/use_firebase';
 import { push } from 'connected-react-router';
 
 import { Box, Heading, Flex, Text, Button } from '@chakra-ui/core';
 
 import { TITLE_SHORT } from '../constants/site';
-import { LANDING, TERMS } from '../constants/routes';
+import { ROOT, TERMS } from '../constants/routes';
 
 const MenuItems = ({ children, ...props }) => (
   <Text cursor="pointer" {...props} mt={{ base: 4, sm: 0 }} mr={6} display="block">
@@ -17,6 +19,19 @@ export default props => {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
   const dispatch = useDispatch();
+  const firebase = useFirebase();
+
+  const handleSignIn = () => {
+    const provider = new auth.GoogleAuthProvider();
+    provider.setCustomParameters({
+      hd: 'tut.jp',
+    });
+    firebase.auth().signInWithRedirect(provider);
+  };
+
+  const handleSignOut = () => {
+    firebase.auth().signOut();
+  };
 
   return (
     <Flex
@@ -30,7 +45,7 @@ export default props => {
       {...props}
     >
       <Flex align="center" mr={5}>
-        <Heading cursor="pointer" as="h1" size="lg" letterSpacing={'-.1rem'} onClick={() => dispatch(push(LANDING))}>
+        <Heading cursor="pointer" as="h1" size="lg" letterSpacing={'-.1rem'} onClick={() => dispatch(push(ROOT))}>
           {TITLE_SHORT}
         </Heading>
       </Flex>
@@ -52,8 +67,13 @@ export default props => {
       </Box>
 
       <Box display={{ xs: show ? 'block' : 'none', sm: 'block' }} mt={{ base: 4, sm: 0 }}>
-        <Button bg="transparent" border="1px">
+        <Button bg="transparent" border="1px" onClick={handleSignIn}>
           サインイン
+        </Button>
+      </Box>
+      <Box display={{ xs: show ? 'block' : 'none', sm: 'block' }} mt={{ base: 4, sm: 0 }}>
+        <Button bg="transparent" border="1px" onClick={handleSignOut}>
+          サインアウト
         </Button>
       </Box>
     </Flex>
