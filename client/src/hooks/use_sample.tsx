@@ -19,7 +19,7 @@ const initialSample: Sample = {
 
 const SampleContext = createContext<SC>({ load: true, sample: initialSample, error: null });
 
-export default () => {
+export default (): SC => {
   return useContext(SampleContext);
 };
 

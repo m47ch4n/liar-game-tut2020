@@ -1,3 +1,5 @@
+import { Lab } from '../types';
+
 export const subjects = [
   { name: 'english1', label: '英語1', credit: 1 },
   { name: 'english2', label: '英語2', credit: 1 },
@@ -28,7 +30,7 @@ export const points = {
   D: 50,
 };
 
-export const labs = [
+export const labs: Lab[] = [
   '石田研',
   '藤戸研',
   '鈴木研',
