@@ -43,7 +43,9 @@ export interface Sample {
 export interface Datum {
   id: Lab;
   label: Lab;
+  count: number;
   value: number;
+  mean: number;
 }
 
 export interface GpaFormData {

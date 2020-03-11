@@ -59,3 +59,22 @@ export const labs: Lab[] = [
   '大村研',
   '大島研',
 ];
+
+export const columns = [
+  {
+    Header: '名前',
+    accessor: 'label',
+  },
+  {
+    Header: '人数',
+    accessor: 'count',
+  },
+  {
+    Header: '合計成績',
+    accessor: 'value',
+  },
+  {
+    Header: '平均成績',
+    accessor: 'mean',
+  },
+];
