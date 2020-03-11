@@ -34,7 +34,7 @@ function App({ firebase }) {
               <SignedInRoute exact path={LAB_FORM}>
                 <LabForm />
               </SignedInRoute>
-              <FilledRoute exact path={LABS}>
+              <FilledRoute path={LABS}>
                 <Labs />
               </FilledRoute>
               <SignedOutRoute exact path={ROOT}>

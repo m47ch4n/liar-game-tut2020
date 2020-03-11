@@ -60,6 +60,11 @@ export const labs: Lab[] = [
   '大島研',
 ];
 
+export const labIndexes: { [key in Lab]?: number } = labs.reduce((acc, lab, index) => {
+  acc[lab] = index;
+  return acc;
+}, {});
+
 export const columns = [
   {
     Header: '名前',

@@ -27,7 +27,7 @@ export const TableCell = styled<'div', SpaceProps & ColorProps & JustifyContentP
   ${justifyContent};
   flex: 1;
   display: flex;
-  min-width: 150px;
+  min-width: 75px;
   align-items: center;
   border-bottom-width: 1px;
   overflow: hidden;

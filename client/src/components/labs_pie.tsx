@@ -10,8 +10,8 @@ const fill = labs.reduce((acc, lab, index) => {
   return [...acc, { match: { id: lab }, id: index % 3 === 0 ? 'dots' : 'lines' }];
 }, []);
 
-export default ({ data }) => (
-  <Box h="50vh">
+export default ({ data, onPieClick }: { data: any; onPieClick?: (datum: any) => void }) => (
+  <Box h={['25vh', '30vh', '50vh', '70vh']}>
     <ResponsivePie
       data={data}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
@@ -34,6 +34,7 @@ export default ({ data }) => (
       animate={true}
       motionStiffness={90}
       motionDamping={15}
+      onClick={datum => onPieClick && onPieClick(datum)}
       defs={[
         {
           id: 'dots',
