@@ -1,3 +1,5 @@
+import { Lab } from '../types';
+
 export const subjects = [
   { name: 'english1', label: '英語1', credit: 1 },
   { name: 'english2', label: '英語2', credit: 1 },
@@ -28,7 +30,7 @@ export const points = {
   D: 50,
 };
 
-export const labs = [
+export const labs: Lab[] = [
   '石田研',
   '藤戸研',
   '鈴木研',
@@ -56,4 +58,28 @@ export const labs = [
   '菅谷研',
   '大村研',
   '大島研',
+];
+
+export const labIndexes: { [key in Lab]?: number } = labs.reduce((acc, lab, index) => {
+  acc[lab] = index;
+  return acc;
+}, {});
+
+export const columns = [
+  {
+    Header: '名前',
+    accessor: 'label',
+  },
+  {
+    Header: '人数',
+    accessor: 'count',
+  },
+  {
+    Header: '合計成績',
+    accessor: 'value',
+  },
+  {
+    Header: '平均成績',
+    accessor: 'mean',
+  },
 ];

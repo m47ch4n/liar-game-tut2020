@@ -98,7 +98,7 @@ export default () => {
   }
 
   return (
-    <Box p={4}>
+    <Box p={[2, 4]}>
       <Text fontSize="2xl" pb={2}>
         成績算出フォーム
       </Text>

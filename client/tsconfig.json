@@ -3,12 +3,7 @@
     "module": "esnext",
     "target": "es5",
     "jsx": "react",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "es2015",
-      "es2017"
-    ],
+    "lib": ["dom", "dom.iterable", "es2015", "es2017"],
     "strict": false,
     "noEmit": true,
     "isolatedModules": true,
@@ -24,14 +19,12 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "checkJs": true,
+    "checkJs": true
   },
   "references": [
     {
       "path": "../shared"
     }
   ],
-  "include": [
-    "./src/**/*"
-  ]
+  "include": ["./src/**/*"]
 }

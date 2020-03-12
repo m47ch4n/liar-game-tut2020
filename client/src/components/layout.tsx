@@ -6,6 +6,7 @@ import NavBar from './nav_bar';
 const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
+  max-width: 1440px;
   padding: 1em 5%;
 `;
 

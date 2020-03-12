@@ -40,6 +40,14 @@ export interface Sample {
   uid: string;
 }
 
+export interface Datum {
+  id: Lab;
+  label: Lab;
+  count: number;
+  value: number;
+  mean: number;
+}
+
 export interface GpaFormData {
   english1: Grade;
   english2: Grade;
