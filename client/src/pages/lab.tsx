@@ -46,12 +46,12 @@ const getRank = (lab: Lab, samples: Sample[], sample: Sample): number[] => {
   const ranks: number[] = [0, 0, 0];
   // tslint:disable-next-line: no-shadowed-variable
   const rank = (samples: Sample[], sample: Sample) => {
-    const worstRank = samples.sort((a, b) => a.result - b.result).findIndex(sample2 => sample2.result > sample.result);
-    if (worstRank === -1) {
+    const others = samples.filter(s => s.uid !== sample.uid);
+    if (others.length === 0) {
       return 1;
-    } else {
-      return samples.length - worstRank + 1;
     }
+    const worstRank = others.sort((a, b) => a.result - b.result).findIndex(other => other.result > sample.result);
+    return samples.length - worstRank + 1;
   };
   ranks[2] = rank(samples2, sample);
   samples2 = samples.filter(s => s.firstChoice === lab);
