@@ -44,7 +44,8 @@ const getRank = (lab: Lab, samples: Sample[], sample: Sample): number[] => {
   }
 
   const ranks: number[] = [0, 0, 0];
-  const rank = (samples, sample) => {
+  // tslint:disable-next-line: no-shadowed-variable
+  const rank = (samples: Sample[], sample: Sample) => {
     const worstRank = samples.sort((a, b) => a.result - b.result).findIndex(sample2 => sample2.result > sample.result);
     if (worstRank === -1) {
       return 1;
