@@ -29,7 +29,11 @@ export const SamplesContextProvider = ({ children }) => {
       .collection('samples')
       .onSnapshot(
         snapshot => {
-          const samples = snapshot.docs.map(doc => doc.data() as Sample);
+          const samples = snapshot.docs
+            .map(doc => doc.data() as Sample)
+            .filter(sample => {
+              return sample.result && sample.firstChoice && sample.secondChoice;
+            });
           setState({ samples, load: false, error: null });
         },
         error => {
