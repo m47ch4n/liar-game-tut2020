@@ -11,7 +11,7 @@ const fill = labs.reduce((acc, lab, index) => {
 }, []);
 
 export default ({ data, onPieClick }: { data: any; onPieClick?: (datum: any) => void }) => (
-  <Box h={['25vh', '30vh', '50vh', '70vh']}>
+  <Box h={['25vh', '30vh', '50vh']}>
     <ResponsivePie
       data={data}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
