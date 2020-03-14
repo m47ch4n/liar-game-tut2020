@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import useSamples, { SamplesContextProvider } from '../hooks/use_samples';
 import useSample from '../hooks/use_sample';
-import { Sample, Datum } from '../types';
+import { Datum } from '../types';
 import { Switch, Route, Redirect } from 'react-router';
 import { Box, Text, SimpleGrid, Stat, StatLabel, StatNumber, Divider } from '@chakra-ui/core';
 import { LABS, NOTFOUND } from '../constants/routes';
@@ -11,28 +11,7 @@ import { labs, labIndexes, columns } from '../constants';
 import LabsChart from '../components/labs_pie';
 import Table from '../components/Table';
 import Lab from './lab';
-
-const collectResults = (samples: Sample[]): Datum[] => {
-  const initialData: Datum[] = labs.map(lab => ({ id: lab, label: lab, count: 0, value: 0, mean: 0 }));
-
-  return samples
-    .reduce((acc, sample) => {
-      // 人数を数える
-      acc[labIndexes[sample.firstChoice]].count += 1;
-      acc[labIndexes[sample.secondChoice]].count += 1;
-
-      // Pieチャートに表示する研究室ごとの値(value)は、「その研究室が第一志望か第二志望に指定されている」サンプル群の成績の総和
-      acc[labIndexes[sample.firstChoice]].value += sample.result;
-      acc[labIndexes[sample.secondChoice]].value += sample.result;
-
-      return acc;
-    }, initialData)
-    .map(datum => ({
-      // 平均を計算する
-      ...datum,
-      mean: datum.count !== 0 ? datum.value / datum.count : 0,
-    }));
-};
+import collectResults from '../util/collect_results';
 
 const Labs = () => {
   const dispatch = useDispatch();

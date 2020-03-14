@@ -3,63 +3,12 @@ import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import useSamples from '../hooks/use_samples';
 import useSample from '../hooks/use_sample';
-import { Lab, Sample, Datum } from '../types';
+import { Datum } from '../types';
 import { Flex, Box, Text, SimpleGrid, Stat, StatLabel, StatNumber, Divider, Button } from '@chakra-ui/core';
 import { LABS } from '../constants/routes';
 import { labs } from '../constants';
-
-const collectResults = (lab: Lab, samples: Sample[]): Datum[] => {
-  samples = samples.filter(s => s.firstChoice === lab || s.secondChoice === lab);
-  let data: Datum[] = [
-    { id: lab, label: lab, count: 0, value: 0, mean: 0 },
-    { id: lab, label: lab, count: 0, value: 0, mean: 0 },
-    { id: lab, label: lab, count: 0, value: 0, mean: 0 },
-  ];
-
-  data = samples.reduce((acc, sample) => {
-    const choice = sample.firstChoice === lab ? 0 : 1;
-    acc[choice].count += 1;
-    acc[2].count += 1;
-    acc[choice].value += sample.result;
-    acc[2].value += sample.result;
-    return acc;
-  }, data);
-
-  data[2] = {
-    ...data[2],
-    count: data[0].count + data[1].count,
-    value: data[0].value + data[1].value,
-  };
-
-  return data.map(datum => ({
-    ...datum,
-    mean: datum.count !== 0 ? datum.value / datum.count : 0,
-  }));
-};
-
-const getRank = (lab: Lab, samples: Sample[], sample: Sample): number[] => {
-  let samples2 = samples.filter(s => s.firstChoice === lab || s.secondChoice === lab);
-  if (samples2.length === 0) {
-    return [1, 1, 1];
-  }
-
-  const ranks: number[] = [0, 0, 0];
-  // tslint:disable-next-line: no-shadowed-variable
-  const rank = (samples: Sample[], sample: Sample) => {
-    const worstRank = samples.sort((a, b) => a.result - b.result).findIndex(sample2 => sample2.result > sample.result);
-    if (worstRank === -1) {
-      return 1;
-    } else {
-      return samples.length - worstRank + 1;
-    }
-  };
-  ranks[2] = rank(samples2, sample);
-  samples2 = samples.filter(s => s.firstChoice === lab);
-  ranks[0] = rank(samples2, sample);
-  samples2 = samples.filter(s => s.secondChoice === lab);
-  ranks[1] = rank(samples2, sample);
-  return ranks;
-};
+import collectResultsByLab from '../util/collect_results_by_lab';
+import getRank from '../util/get_rank';
 
 interface Info {
   data: Datum[];
@@ -74,7 +23,7 @@ export default ({ id }) => {
 
   useEffect(() => {
     if (!load && samples) {
-      setInfo({ data: collectResults(labs[id], samples), rank: getRank(labs[id], samples, sample) });
+      setInfo({ data: collectResultsByLab(labs[id], samples), rank: getRank(labs[id], samples, sample) });
     }
   }, [load, samples, sample, id]);
 
