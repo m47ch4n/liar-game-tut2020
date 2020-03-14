@@ -3,8 +3,8 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /samples/{sample} {
       allow read: if authenticated();
-      allow update: if authenticated() && ownUid(sample) && ownUid(resource.data.uid);
-      allow create: if authenticated() && ownUid(sample) && ownUid(request.resource.data.uid);
+      allow update: if authenticated() && ownUid(sample) && ownUid(request.resource.data.uid) && uniqueLab() && ownUid(resource.data.uid);
+      allow create: if authenticated() && ownUid(sample) && ownUid(request.resource.data.uid) && uniqueLab();
     }
   }
 
@@ -14,5 +14,9 @@ service cloud.firestore {
 
   function ownUid(id) {
     return request.auth.uid == id
+  }
+
+  function uniqueLab() {
+    return request.resource.data.firstChoice != request.resource.data.secondChoice
   }
 }

@@ -17,10 +17,16 @@ export default () => {
   const firebase = useFirebase();
   const { user } = useUser();
   const { sample } = useSample();
-  const { handleSubmit, errors, register } = useForm<LabFormData>();
+  const { handleSubmit, errors, register, watch } = useForm<LabFormData>({
+    defaultValues: {
+      firstChoice: undefined,
+      secondChoice: undefined,
+    },
+  });
+  const values = watch();
   const toast = useToast();
 
-  function onSubmit(values) {
+  function onSubmit() {
     setCondition('req');
     firebase
       .firestore()
@@ -70,7 +76,10 @@ export default () => {
               name="firstChoice"
               label={`第一志望`}
               errors={errors}
-              register={register({ required: '選択してください。' })}
+              register={register({
+                required: '選択してください。',
+                validate: { unique: lab => lab !== values.secondChoice || '同じ研究室は選択できません。' },
+              })}
             />
           </Box>
           <Box p={2} pb={4} key={2}>
@@ -78,7 +87,10 @@ export default () => {
               name="secondChoice"
               label={`第二志望`}
               errors={errors}
-              register={register({ required: '選択してください。' })}
+              register={register({
+                required: '選択してください。',
+                validate: { unique: lab => lab !== values.firstChoice || '同じ研究室は選択できません。' },
+              })}
             />
           </Box>
         </SimpleGrid>
